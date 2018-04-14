@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    tools:context=".GuardarMedico">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_cedula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="Cedula:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_cedula"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/boton_redondeado"
+                android:hint=" Ingrese la cedula"
+                android:textColor="@color/colorSecondary" />
+
+            <TextView
+                android:id="@+id/tv_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="Nombre(s):"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_nombre"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/boton_redondeado"
+                android:hint=" Ingrese el nombre(s)"
+                android:textColor="@color/colorSecondary" />
+
+            <TextView
+                android:id="@+id/tv_apell_pat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="Apellido Paterno:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_apell_pat"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/boton_redondeado"
+                android:hint=" Ingresa el apellido paterno"
+                android:textColor="@color/colorSecondary" />
+
+            <TextView
+                android:id="@+id/tv_apell_mat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="Apellido Materno:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/ed_apell_mat"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/boton_redondeado"
+                android:hint=" Ingrese el apellido materno"
+                android:textColor="@color/colorSecondary" />
+
+            <TextView
+                android:id="@+id/tv_correo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="10dp"
+                android:text="Correo electronico:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText5"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/boton_redondeado"
+                android:hint=" Ingrese el correo electronico"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorSecondary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="40dp"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAceptar"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/redondo"
+                    android:text="Aceptar"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:background="@drawable/redondo"
+                    android:text="Cancelar"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

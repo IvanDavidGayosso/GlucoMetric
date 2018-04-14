@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/regitro_glucosa"
+    tools:context=".RegistroGlucosa">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.ivan.led.UserInterfaz">
+
+        <TextView
+            android:id="@+id/IdControl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Coontrol led" />
+
+        <Button
+            android:id="@+id/IdEncender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/IdControl"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:text="Encender" />
+
+        <Button
+            android:id="@+id/IdApagar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/IdEncender"
+            android:layout_below="@+id/IdEncender"
+            android:layout_marginTop="40dp"
+            android:text="Apagar" />
+
+        <TextView
+            android:id="@+id/IdBufferIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/IdControl"
+            android:layout_below="@+id/IdApagar"
+            android:layout_marginTop="44dp"
+            android:text="Dato:" />
+
+        <Button
+            android:id="@+id/IdDesconectar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/IdApagar"
+            android:layout_marginBottom="24dp"
+            android:text="Desconectar" />
+
+        <TextView
+            android:id="@+id/IdFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/IdBufferIn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="Fecha:" />
+    </RelativeLayout>
+
+</FrameLayout>

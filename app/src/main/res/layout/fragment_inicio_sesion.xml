@@ -1,0 +1,109 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/InicioSesion"
+    android:background="@color/color"
+    tools:context="com.example.ivan.glucometric.InicioSesion">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="fill"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="400dp"
+                    android:layout_height="240dp"
+                    android:src="@drawable/g" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:text="Usuario"
+                    android:textColor="#FBFAFA"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/boton_redondeado"
+                    android:hint="Ingrese su usuario"
+                    android:padding="5dp"
+                    android:textColor="#FBFAFA"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:text="Contraseña:"
+                    android:textColor="#FBFAFA"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/boton_redondeado"
+                    android:hint="Ingrese la contraseña"
+                    android:padding="5dp"
+                    android:textColor="#FBFAFA"
+                    android:textSize="18dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:background="@color/color"
+                    android:text="Olvido su contraseña"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnAcceder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/redondo"
+                    android:text="Acceder"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnRegistro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="80dp"
+                    android:background="@color/color"
+                    android:text="Registrarme"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>
