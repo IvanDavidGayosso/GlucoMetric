@@ -20,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".a" />
         <activity android:name=".RegistroUsuario" />
         <activity android:name=".GuardarMedico" />
         <activity android:name=".Opciones" />
@@ -28,9 +27,12 @@
         <activity android:name=".InicioSesion" />
         <activity
             android:name=".MenuPrincipal"
-            android:label="@string/title_activity_menu_principal"></activity>
+            android:label="@string/title_activity_menu_principal" />
         <activity android:name=".GraficasGlucosa" />
         <activity android:name=".BuscarDispositivos" />
+        <activity android:name=".ListaElementos" />
+        <activity android:name=".Usuario" />
+        <activity android:name=".ModificarUsuario"></activity>
     </application>
 
 </manifest>

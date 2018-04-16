@@ -15,15 +15,13 @@ import android.widget.TextView;
 public class Adaptador extends BaseAdapter{
     private static LayoutInflater inflater = null;
     Context contexto;
-    String[] datos;
-    Fragment guardar_medico,opciones;
+    String[][] datos;
     Integer id;
     GuardarMedico guardar_medico_class;
 
-    public Adaptador(Context contexto,Fragment opciones, String[] datos){
+    public Adaptador(Context contexto, String[][] datos){
         this.contexto=contexto;
         this.datos=datos;
-        this.opciones=opciones;
         inflater=(LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
 
 
@@ -34,27 +32,10 @@ public class Adaptador extends BaseAdapter{
         final View vista= inflater.inflate(R.layout.elemento_lista,null);
         this.id=i;
         TextView nombre = (TextView) vista.findViewById(R.id.tv_nombre);
-        ImageButton editar = (ImageButton) vista.findViewById(R.id.ib_editar);
-        ImageButton eliminar = (ImageButton) vista.findViewById(R.id.ib_eliminar);
-        nombre.setText(datos[i]);
-        editar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+        TextView cedula = (TextView) vista.findViewById(R.id.tv_cedula);
+        nombre.setText(datos[i][0]);
+        cedula.setText(datos[i][1]);
 
-
-                FragmentManager mi_manejador = opciones.getFragmentManager();
-                FragmentTransaction mi_transaccion= mi_manejador.beginTransaction();
-                mi_transaccion.replace(R.id.opciones_usuario,guardar_medico).commit();
-            }
-        });
-
-        eliminar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //nooo
-            }
-
-        });
 
         return vista;
     }

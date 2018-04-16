@@ -13,8 +13,8 @@
         android:layout_weight="2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/encabezado">
-        
+        android:background="@drawable/fondo">
+
         <TextView
             android:id="@+id/titulo"
             android:text="Menú principal"
@@ -23,7 +23,15 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        
+
+        <Button
+            android:id="@+id/bn_salir"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="Button" />
+
     </RelativeLayout>
 
     <GridLayout

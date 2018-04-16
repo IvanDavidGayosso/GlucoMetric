@@ -121,10 +121,9 @@ public class RegistroGlucosa extends AppCompatActivity {
     {
         super.onResume();
         //Consigue la direccion MAC desde DeviceListActivity via intent
-
+        Intent intent = getIntent();
         //Consigue la direccion MAC desde DeviceListActivity via EXTRA
-        //System.out.println(comunicacion.getMAC());
-        //address = comunicacion.getMAC();//<-<- PARTE A MODIFICAR >->->
+        address = intent.getStringExtra(BuscarDispositivos.EXTRA_DEVICE_ADDRESS);//<-<- PARTE A MODIFICAR >->->
         //Setea la direccion MAC
         BluetoothDevice device = btAdapter.getRemoteDevice(address);
 

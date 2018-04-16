@@ -2,11 +2,13 @@ package com.example.ivan.glucometric;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class BaseDeDatos extends SQLiteOpenHelper{
 /*
@@ -19,7 +21,9 @@ public class BaseDeDatos extends SQLiteOpenHelper{
             );*/
     //CREACION DE LA BASE DE DATOS DE MANERA LOCAL
         //Base de datos
-    public static final String GLUCOMETRIC = "GLUCOMETRIC";
+    public static final String GLUCOMETRIC = "glucometric.db";
+    public static final Integer VERSION = 1;
+    Context context;
 
         //Tabla usuario
     public static final String ID_USUARIO = "id_usuario";
@@ -53,7 +57,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
     public static final String TABLA_CONTRASENAS = "CREATE TABLE IF NOT EXISTS " + CONTRASENAS+ "("
                                                 +ID_PASS + " INTEGER PRIMARY KEY,"
                                                 +PASSWORD + " TEXT NOT NULL ,"
-                                                +FECHA_PASS + " DATE NOT NULL ,"
+                                                +FECHA_PASS + " DATE NOT NULL,"
                                                 +USUARIO+ " TEXT NOT NULL, "
                                                 +ID_USUARIO + " INTEGER NOT NULL,"
                                                 +"FOREIGN KEY ("+ ID_USUARIO +") REFERENCES " + USUARIOS + "("+ ID_USUARIO + "));";
@@ -71,9 +75,9 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                                                     +VALOR_MAXIMO+ " FLOAT(5,2) );";
 
     public static final String DISPOSITIVOS = "dispositivos";
-    public static final String SERIE = "id_estado";
-    public static final String MODELO ="estado_glucosa";
-    public static final String MAC="valor_minimo";
+    public static final String SERIE = "serie";
+    public static final String MODELO ="modelo";
+    public static final String MAC="mac";
     public static final String DESCRIPCION ="valor_maximo";
     static final String TABLA_DISPOSITIVOS = "CREATE TABLE IF NOT EXISTS " + DISPOSITIVOS+ "("
                                             +SERIE+ " TEXT PRIMARY KEY ,"
@@ -89,21 +93,36 @@ public class BaseDeDatos extends SQLiteOpenHelper{
     public static final String HORA ="hora";
     public static final String VALOR="valor";
     public static final String UNIDAD_MEDIDA ="unidad_medida";
-    static final String TABLA_REGISTRO_GLUCOSA = "CREATE TABLE IF NOT EXISTS " + REGISTROS_GLUCOSA+ "("
+    static final String TABLA_REGISTRO_GLUCOSA = "CREATE TABLE IF NOT EXISTS " + REGISTROS_GLUCOSA+ " ("
                                                 +ID_REGISTRO_GLUCOSA+ " INTEGER PRIMARY KEY ,"
                                                 +FECHA + " DATE NOT NULL ,"
                                                 +HORA + " TIME NOT NULL ,"
-                                                +VALOR+ " INTEGER NOT NULL,d"
-                                                +UNIDAD_MEDIDA + "TEXTO NOT NULL"
-                                                +SERIE + " TEXT NOT NULL, "
-                                                +ID_USUARIO + " INTEGER NOT NULL,"
-                                                +"FOREIGN KEY ("+ ID_USUARIO +") REFERENCES " + USUARIOS + "("+ ID_USUARIO + "),"
-                                                +"FOREIGN KEY ("+ ID_ESTADO +") REFERENCES " + ESTADOS_GLUCOSA + "("+ ID_ESTADO+ "));";;
+                                                +VALOR+ " FLOAT NOT NULL,"
+                                                +UNIDAD_MEDIDA + " TEXTO NOT NULL,"
+                                                +SERIE + " INTEGER NOT NULL, "
+                                                +ID_ESTADO + " INTEGER NOT NULL,"
+                                                +"FOREIGN KEY ("+ SERIE +") REFERENCES " + DISPOSITIVOS + "("+ SERIE + "),"
+                                                +"FOREIGN KEY ("+ ID_ESTADO +") REFERENCES " + ESTADOS_GLUCOSA + "("+ ID_ESTADO + "));";
+
+    public static final String CEDULA="cedula";
+    public static final String MEDICOS = "medicos";
+    public static final String TABLA_MEDICOS="CREATE TABLE IF NOT EXISTS " + MEDICOS + "("
+                                                +CEDULA+ " INTEGER PRIMARY KEY ,"
+                                                +NOMBRE + " DATE NOT NULL ,"
+                                                +APELL_PATERNO + " TIME NOT NULL ,"
+                                                +APELL_MATERNO+ " INTEGER NOT NULL,"
+                                                +CORREO_ELECTRONICO + "TEXTO NOT NULL,"
+                                                +ID_USUARIO + " INTEGER NOT NULL, "
+                                                +ESTADO + " INTEGER NOT NULL,"
+                                                +"FOREIGN KEY ("+ ID_USUARIO +") REFERENCES " + USUARIOS + "("+ ID_USUARIO+ "));";
+
+    public static final String DROP_DATABASE="DROP TABLE IF EXISTS "+GLUCOMETRIC+";";
 
 
 
-    public BaseDeDatos(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public BaseDeDatos(Context context) {
+        super(context, GLUCOMETRIC, null,VERSION );
+        this.context = context;
 
     }
 
@@ -113,6 +132,8 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         db.execSQL(TABLA_CONTRASENAS);
         db.execSQL(TABLA_ESTADOS_GLUCOSA);
         db.execSQL(TABLA_DISPOSITIVOS);
+        db.execSQL(TABLA_REGISTRO_GLUCOSA);
+        db.execSQL(TABLA_MEDICOS);
     }
 
     @Override
@@ -120,7 +141,8 @@ public class BaseDeDatos extends SQLiteOpenHelper{
 
     }
 
-    public void insetar(Context context, SQLiteDatabase db, String nom, String ap_pa, String ap_ma, String co_el, String fe_na, Float pe, Float est, Boolean es){
+    public void insertar( String nom, String ap_pa, String ap_ma, String co_el, String fe_na, Float pe, Float est, Boolean es){
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values= new ContentValues();
         values.put(NOMBRE , nom);
         values.put(APELL_PATERNO, ap_pa);
@@ -131,7 +153,120 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         values.put(ESTATURA , est);
         values.put(ESTADO , es);
         db.insert(USUARIOS,null,values);
+        System.out.println("Ya insertooooooooooooooo");
+        db.close();
+    }
+
+    public void actualizar(String iden, String nom, String ap_pa, String ap_ma, String co_el, String fe_na, Float pe, Float est, Boolean es){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NOMBRE , nom);
+        values.put(APELL_PATERNO, ap_pa);
+        values.put(APELL_MATERNO , ap_ma);
+        values.put(CORREO_ELECTRONICO, co_el);
+        values.put(FECHA_NACIMIENTO , fe_na);
+        values.put(PESO , pe);
+        values.put(ESTATURA , est);
+        values.put(ESTADO , es);
+        String[] id = {iden};
+        db.update(USUARIOS, values, ID_USUARIO + " = ?",id);
+        db.close();
+        Toast.makeText(context.getApplicationContext(), "Se modifico con exito " , Toast.LENGTH_LONG).show();
+    }
+
+    public String buscar(String usu,String pass) {
+
+        try {
+            String id = "null";
+            String[] columns = {ID_USUARIO};
+            SQLiteDatabase db = this.getWritableDatabase();
+            String selection = USUARIO + " = ? and " + PASSWORD + "=?";
+            String[] selectionArgs = {usu, pass};
+            Cursor cursor = db.query(CONTRASENAS, //Table to query
+                    columns,                    //columns to return
+                    selection,                  //columns for the WHERE clause
+                    selectionArgs,              //The values for the WHERE clause
+                    null,                       //group the rows
+                    null,                      //filter by row groups
+                    null);                      //The sort order
+            cursor.moveToFirst();
+            id = cursor.getString(0);
+
+            db.close();
+            return id;
+        }catch (CursorIndexOutOfBoundsException error){
+            return "null";
+        }
+    }
+
+    public void insertar( String usu, String con,String fec,Integer id_usu){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values= new ContentValues();
+        values.put(PASSWORD , con);
+        values.put(FECHA_PASS, fec);
+        values.put(USUARIO , usu);
+        values.put(ID_USUARIO,id_usu);
+        db.insert(CONTRASENAS,null,values);
+        db.close();
         Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
+    }
+
+    public String buscar(String nom,String ap, String am){
+
+        // array of columns to fetch
+        String id="null";
+        String[] columns = {ID_USUARIO};
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = NOMBRE + " = ? and "+APELL_PATERNO+ "= ? and " +APELL_PATERNO +" = ?";
+        String[] selectionArgs = {nom, ap, am};
+        System.out.println("Datos recididos "+ nom +" "+ap+" "+am);
+        Cursor cursor = db.query(USUARIOS, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+
+            if (cursor.moveToFirst()) {
+                id = cursor.getString(0);
+                System.out.println("++++++ hola " + id);
+            }else{
+                System.out.println("--------- Algo salio mal");
+            }
+
+        cursor.close();
+        db.close();
+        return id;
+    }
+
+    public ArrayList<String> buscar( String tabla, String columna, Integer valor){
+
+        // array of columns to fetch
+        ArrayList<String> datos = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = columna + " = ? ";
+        String[] selectionArgs = {valor.toString()};
+        Cursor cursor = db.query(tabla, //Table to query
+                null,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+        int cursorCount = cursor.getColumnCount();
+
+        cursor.moveToFirst();
+
+        if (cursor.moveToFirst()) {
+            for(int i=0;i<cursorCount;i++)
+            datos.add(i,cursor.getString(i));
+        }
+
+        cursor.close();
+        db.close();
+        return datos;
     }
 
 }

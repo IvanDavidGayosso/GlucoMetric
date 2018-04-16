@@ -17,12 +17,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class RegistroUsuario extends AppCompatActivity {
-    View registro_usuario;
     Button btn_aceptar,btn_cancelar;
     EditText id,nombre,ap,am;
     String ID;
+    String opcion="1";
+    BaseDeDatos basedatos;
+    SQLiteDatabase db;
+    static String OPCION="usuario";
+
 
     public RegistroUsuario() {
 
@@ -33,39 +39,39 @@ public class RegistroUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_registro_usuario);
         btn_aceptar = (Button)findViewById(R.id.btnAceptar);
-        id = (EditText) findViewById(R.id.Id);
         nombre = (EditText) findViewById(R.id.et_nombre);
         ap = (EditText) findViewById(R.id.et_apell_pat);
-        am = (EditText) findViewById(R.id.et_apell_pat);
+        am = (EditText) findViewById(R.id.et_apell_mat);
+        basedatos = new BaseDeDatos(this);
+        final Intent valor = getIntent();
 
-        btn_aceptar = (Button) findViewById(R.id.btnAceptar);
+
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                 Bundle parametros = new Bundle();
+                 parametros.putString("nombre", nombre.getText().toString());
+                 parametros.putString("ap_pa",ap.getText().toString());
+                 parametros.putString("ap_ma",ap.getText().toString());
 
-                BaseDeDatos basedatos = new BaseDeDatos(getApplicationContext(),"glucometric.db",null,1);
-                SQLiteDatabase db = basedatos.getWritableDatabase();
-                basedatos.insetar(getApplicationContext(),db,nombre.getText().toString(),ap.getText().toString(),am.getText().toString(),"hj","1997/04/03",60.8f,1.6f,true);
-                Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
-                startActivity(intent);
-
-
-
-
+                Intent i = new Intent(getApplicationContext(), Usuario.class);
+                i.putExtras(parametros);
+                startActivity(i);
+                finish();
             }
         });
 
-        /*btn_cancelar = (Button) registro_usuario.findViewById(R.id.btnCancelar);
+        btn_cancelar = (Button) findViewById(R.id.btnCancelar);
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                inicio_sesion = new InicioSesion();
-                FragmentManager mi_manejador=getFragmentManager();
-                FragmentTransaction mi_transaccion= mi_manejador.beginTransaction();
-                mi_transaccion.replace(R.id.registrar,inicio_sesion).commit();
-
+                Intent intent = new Intent(getApplicationContext(), InicioSesion.class);
+                startActivity(intent);
+                finish();
             }
-        });*/
+        });
     }
+
+
 
 
 }
