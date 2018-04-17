@@ -16,10 +16,11 @@ public class Adaptador extends BaseAdapter{
     private static LayoutInflater inflater = null;
     Context contexto;
     String[][] datos;
-    Integer id;
+    String id_usuario;
     GuardarMedico guardar_medico_class;
 
-    public Adaptador(Context contexto, String[][] datos){
+    public Adaptador(Context contexto,String datos[][] ){
+        BaseDeDatos datosConsulta = new BaseDeDatos(contexto);
         this.contexto=contexto;
         this.datos=datos;
         inflater=(LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
@@ -30,9 +31,8 @@ public class Adaptador extends BaseAdapter{
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
         final View vista= inflater.inflate(R.layout.elemento_lista,null);
-        this.id=i;
-        TextView nombre = (TextView) vista.findViewById(R.id.tv_nombre);
         TextView cedula = (TextView) vista.findViewById(R.id.tv_cedula);
+        TextView nombre = (TextView) vista.findViewById(R.id.tv_nombre);
         nombre.setText(datos[i][0]);
         cedula.setText(datos[i][1]);
 

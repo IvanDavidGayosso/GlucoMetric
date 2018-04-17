@@ -11,7 +11,6 @@ import android.widget.EditText;
 
 public class Usuario extends AppCompatActivity {
     BaseDeDatos basedatos;
-    SQLiteDatabase db;
     EditText usuario,contrasena,rep_contra;
     Button aceptar,cancelar;
 
@@ -25,12 +24,14 @@ public class Usuario extends AppCompatActivity {
         rep_contra =(EditText) findViewById(R.id.et_rep_contra);
         aceptar = (Button) findViewById(R.id.btnAceptar);
         cancelar = (Button) findViewById(R.id.btnCancelar);
-        final Bundle parametros = this.getIntent().getExtras();
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                basedatos.insertar(parametros.getString("nombre"),parametros.getString("ap_pa"),parametros.getString("ap_ma"), "hj", "1997/04/03", 60.8f, 1.6f, true);
-                String id = basedatos.buscar(parametros.getString("nombre"),parametros.getString("ap_pa"),parametros.getString("ap_ma"));
+
+                final Bundle parametros = getIntent().getExtras();
+                basedatos.insertarUsuario(parametros.getString("nombre"),parametros.getString("pate"),parametros.getString("mate"), parametros.getString("fena"), parametros.getFloat("peso"), parametros.getFloat("esta"), true);
+                System.out.println(parametros.getString("nombre")+parametros.getString("pate")+parametros.getString("mate"));
+                String id = basedatos.buscarId(parametros.getString("nombre"),parametros.getString("pate"),parametros.getString("mate"));
                 basedatos.insertar(usuario.getText().toString(),contrasena.getText().toString(),"2018/02/01",Integer.parseInt(id));
                 Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
                 intent.putExtra("IDUSUARIO",basedatos.buscar(usuario.getText().toString(),contrasena.getText().toString()));

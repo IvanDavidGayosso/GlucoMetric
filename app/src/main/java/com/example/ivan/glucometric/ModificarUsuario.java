@@ -20,9 +20,9 @@ public class ModificarUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_registro_usuario);
         btn_aceptar = (Button)findViewById(R.id.btnAceptar);
-        nombre = (EditText) findViewById(R.id.et_nombre);
-        ap = (EditText) findViewById(R.id.et_apell_pat);
-        am = (EditText) findViewById(R.id.et_apell_mat);
+        nombre = (EditText) findViewById(R.id.nombre);
+        ap = (EditText) findViewById(R.id.ap);
+        am = (EditText) findViewById(R.id.am);
         basedatos = new BaseDeDatos(this);
         datos=new ArrayList();
         buscar();

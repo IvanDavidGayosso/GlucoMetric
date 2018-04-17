@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class RegistroUsuario extends AppCompatActivity {
     Button btn_aceptar,btn_cancelar;
-    EditText id,nombre,ap,am;
+    EditText id,nombre,apellido_pat,apellido_mat,fecha_naci,peso,estatura;
     String ID;
     String opcion="1";
     BaseDeDatos basedatos;
@@ -38,10 +38,13 @@ public class RegistroUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_registro_usuario);
-        btn_aceptar = (Button)findViewById(R.id.btnAceptar);
-        nombre = (EditText) findViewById(R.id.et_nombre);
-        ap = (EditText) findViewById(R.id.et_apell_pat);
-        am = (EditText) findViewById(R.id.et_apell_mat);
+        nombre = (EditText) findViewById(R.id.nombre);
+        apellido_pat = (EditText) findViewById(R.id.ap);
+        apellido_mat = (EditText) findViewById(R.id.am);
+        fecha_naci = (EditText)findViewById(R.id.fecha_nac);
+        peso = (EditText)findViewById(R.id.et_peso);
+        estatura = (EditText)findViewById(R.id.et_estatura);
+        btn_aceptar= (Button) findViewById(R.id.btnAceptar);
         basedatos = new BaseDeDatos(this);
         final Intent valor = getIntent();
 
@@ -51,8 +54,11 @@ public class RegistroUsuario extends AppCompatActivity {
 
                  Bundle parametros = new Bundle();
                  parametros.putString("nombre", nombre.getText().toString());
-                 parametros.putString("ap_pa",ap.getText().toString());
-                 parametros.putString("ap_ma",ap.getText().toString());
+                 parametros.putString("pate" , apellido_pat.getText().toString());
+                 parametros.putString("mate" , apellido_mat.getText().toString());parametros.putString("corre", nombre.getText().toString());
+                 parametros.putString("fena" , fecha_naci.getText().toString());
+                 parametros.putFloat("peso" , Float.parseFloat(peso.getText().toString()));
+                 parametros.putFloat("esta" , Float.parseFloat(estatura.getText().toString()));
 
                 Intent i = new Intent(getApplicationContext(), Usuario.class);
                 i.putExtras(parametros);

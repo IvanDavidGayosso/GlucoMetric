@@ -36,7 +36,6 @@ public class MenuPrincipal extends AppCompatActivity {
         cv_perfil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, ModificarUsuario.class);
-                intent.putExtra(OPCION,valor);
                 intent.putExtra("IDUSUARIO",usuario);
                 startActivity(intent);
             }
@@ -44,7 +43,8 @@ public class MenuPrincipal extends AppCompatActivity {
 
         cv_medico.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MenuPrincipal.this, GuardarMedico.class);
+                Intent intent = new Intent(MenuPrincipal.this, ListaElementos.class);
+                intent.putExtra("IDUSUARIO",usuario);
                 startActivity(intent);
             }
         });
@@ -52,6 +52,7 @@ public class MenuPrincipal extends AppCompatActivity {
         cv_dispositivos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, BuscarDispositivos.class);
+                intent.putExtra("IDUSUARIO",usuario);
                 startActivity(intent);
             }
         });
@@ -59,6 +60,7 @@ public class MenuPrincipal extends AppCompatActivity {
         cv_graficas.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, GraficasGlucosa.class);
+                intent.putExtra("IDUSUARIO",usuario);
                 startActivity(intent);
             }
         });
@@ -67,6 +69,7 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, InicioSesion.class);
+                intent.putExtra("IDUSUARIO",usuario);
                 startActivity(intent);
                 finish();
             }
