@@ -9,12 +9,14 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+//Clase modificar usuario en la cual se crean las variables en las que el usuario sera modificado mediante los campos de texto y a su vez los botones
 public class ModificarUsuario extends AppCompatActivity {
     Button btn_aceptar,btn_cancelar;
     EditText id,nombre,ap,am;
     String ID;
     BaseDeDatos basedatos;
     ArrayList<String> datos;
+    //Metodo en el cual se crea una instancia para llamar a los valores antes generados; al final de esta instancia se genera la base de datos y se manda a llamar al metodo (buscar)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,7 @@ public class ModificarUsuario extends AppCompatActivity {
         datos=new ArrayList();
         buscar();
 
+        //Esta opción generará el codigo para realizar el cambio de interfaz (Menu Principal)
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent id_usuario= getIntent();
@@ -40,6 +43,7 @@ public class ModificarUsuario extends AppCompatActivity {
         });
     }
 
+    //Se crea el metodo buscar el cual obtendra los datos del usuario para mostrar los datos que se crearon con anterioridad
     public  void buscar(){
         Intent id_usuario= getIntent();
         datos=basedatos.buscar(basedatos.USUARIOS,basedatos.ID_USUARIO,Integer.parseInt(id_usuario.getStringExtra("IDUSUARIO")));
