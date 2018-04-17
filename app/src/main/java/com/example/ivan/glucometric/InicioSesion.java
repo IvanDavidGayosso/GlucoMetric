@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.security.Principal;
 
-
+//Clase der la interfaz (InicioSesion) en el cual se declaran los componentes de la interfaz.
 public class InicioSesion extends AppCompatActivity {
     Fragment registrar;
     Button  btnReg,btnAcce;
@@ -29,6 +29,7 @@ public class InicioSesion extends AppCompatActivity {
     EditText usuario,contrasena;
 
 
+    //Se guarda lo que se obtuvo en la interfaz mediante las variables generadas con anterioridad.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_inicio_sesion);
@@ -38,6 +39,8 @@ public class InicioSesion extends AppCompatActivity {
         basedatos = new BaseDeDatos(this);
 
 
+        //Realizará la operacion de boton al momento del Click.
+        //La acción que se realiza es ir de la interfaz (InisioSesion) a la interfaz (Registro)
         btnReg = (Button) findViewById(R.id.btnRegistro);
         btnReg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -47,6 +50,9 @@ public class InicioSesion extends AppCompatActivity {
             }
         });
 
+        //La variable del boton es igual alboton de la interfaz (InisioSesion)
+        //Aquí esta el Evento del botón Aceptar. Al momento de dar clic la aplicación busca similitud entre el usuario y la contraseña.
+        //Posteriormente el usuario entrará a la interfaz (MenuPrincipal)
         btnAcce = (Button) findViewById(R.id.btnAcceder);
         btnAcce.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,6 +61,7 @@ public class InicioSesion extends AppCompatActivity {
                     intent.putExtra("IDUSUARIO",basedatos.buscar(usuario.getText().toString(),contrasena.getText().toString()));
                     startActivity(intent);
 
+                    //Al no ser iguales la contraseña y el usuario se muestra el mensaje para que el usuario verifique sus datos
                 }else{
                     Toast.makeText(getApplicationContext(), "Verifique sus datos " , Toast.LENGTH_LONG).show();
 
