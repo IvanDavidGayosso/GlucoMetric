@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
+//Clase de RegistroUsuario en donde se encuentran las variables de los botones, los campos de textoy la base de datos.
 public class RegistroUsuario extends AppCompatActivity {
     Button btn_aceptar,btn_cancelar;
     EditText id,nombre,ap,am;
@@ -29,11 +29,11 @@ public class RegistroUsuario extends AppCompatActivity {
     SQLiteDatabase db;
     static String OPCION="usuario";
 
-
+    //Constructor
     public RegistroUsuario() {
 
     }
-
+//Se enlazan las variables anteriormente creadas con los campos de texto
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class RegistroUsuario extends AppCompatActivity {
         basedatos = new BaseDeDatos(this);
         final Intent valor = getIntent();
 
-
+        //Se crea un Evento en el cual se guardaran los parametros de los usuarios
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -61,6 +61,7 @@ public class RegistroUsuario extends AppCompatActivity {
             }
         });
 
+        //Se generá otro Evento en el cual regresa a la interfaz (InicioSesion)
         btn_cancelar = (Button) findViewById(R.id.btnCancelar);
         btn_cancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
