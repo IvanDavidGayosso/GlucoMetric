@@ -1,3 +1,4 @@
+
 package com.example.ivan.glucometric;
 
 import android.content.Intent;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+//Clase en la que se tienen los contenedores y algunas variables
+//Clase en la cual se generán las variables de los botones del MenuPrincipal
 public class MenuPrincipal extends AppCompatActivity {
     CardView cv_perfil,cv_medico,cv_graficas,cv_dispositivos;
     static String OPCION="opcion";
@@ -21,6 +24,7 @@ public class MenuPrincipal extends AppCompatActivity {
     Button salir;
 
 
+    //Se mandan a llamar las variables de la clase y se igualan con los botones de la interfaz
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,7 @@ public class MenuPrincipal extends AppCompatActivity {
         final Intent valor_inicio = getIntent();
         usuario= valor_inicio.getStringExtra("IDUSUARIO");
 
+        //En este Evento, al momento del clic en perfil dirigirá al usuario a ModificarUsuario
         cv_perfil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, ModificarUsuario.class);
@@ -41,6 +46,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        ////En este Evento, al momento del clic en perfil dirigirá al usuario a GuardarMedico para lo cual lo diriguirá a ese Activity
         cv_medico.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, ListaElementos.class);
@@ -49,6 +55,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        //En este Evento, al momento del clic en perfil dirigirá al usuario a BuscarDispositivos
         cv_dispositivos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, BuscarDispositivos.class);
@@ -57,6 +64,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        //En este Evento, al momento del clic en perfil dirigirá al usuario a la interfaz GraficasGlucosa iniciando dicho Activity
         cv_graficas.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, GraficasGlucosa.class);
@@ -65,6 +73,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        //En este Evento, al momento del clic en perfil dirigirá al usuario a la interfaz de InicioSesion
         salir.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

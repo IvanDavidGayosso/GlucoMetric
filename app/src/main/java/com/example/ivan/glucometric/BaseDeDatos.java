@@ -41,6 +41,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                                                 + NOMBRE + " TEXT NOT NULL,"
                                                 + APELL_PATERNO + " TEXT NOT NULL,"
                                                 + APELL_MATERNO + " TEXT NOT NULL,"
+                                                + CORREO_ELECTRONICO + " TEXT NOT NULL,"
                                                 + FECHA_NACIMIENTO + " DATE NOT NULL,"
                                                 + PESO + " FLOAT NOT NULL ,"
                                                 + ESTATURA + " FLOAT NOT NULL ,"
@@ -111,8 +112,8 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                                                 +APELL_PATERNO + " TIME NOT NULL ,"
                                                 +APELL_MATERNO+ " INTEGER NOT NULL,"
                                                 +CORREO_ELECTRONICO + "TEXTO NOT NULL,"
-                                                +ESTADO + " INTEGER NOT NULL,"
                                                 +ID_USUARIO + " INTEGER NOT NULL, "
+                                                +ESTADO + " INTEGER NOT NULL,"
                                                 +"FOREIGN KEY ("+ ID_USUARIO +") REFERENCES " + USUARIOS + "("+ ID_USUARIO+ "));";
 
     public static final String DROP_DATABASE="DROP TABLE IF EXISTS "+GLUCOMETRIC+";";
@@ -140,74 +141,20 @@ public class BaseDeDatos extends SQLiteOpenHelper{
 
     }
 
-    public void Eliminar(String tabla, String iden, String col){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values= new ContentValues();
-
-        values.put(ESTADO , 0);
-        String[] id = {iden};
-        db.update(tabla, values, col + " = ?",id);
-
-        db.close();
-    }
-    public void insertarUsuario( String nom, String ap_pa, String ap_ma, String fe_na, Float pe, Float est, Boolean es){
+    public void insertar( String nom, String ap_pa, String ap_ma, String co_el, String fe_na, Float pe, Float est, Boolean es){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values= new ContentValues();
         values.put(NOMBRE , nom);
         values.put(APELL_PATERNO, ap_pa);
         values.put(APELL_MATERNO , ap_ma);
+        values.put(CORREO_ELECTRONICO, co_el);
         values.put(FECHA_NACIMIENTO , fe_na);
         values.put(PESO , pe);
         values.put(ESTATURA , est);
         values.put(ESTADO , es);
         db.insert(USUARIOS,null,values);
+        System.out.println("Ya insertooooooooooooooo");
         db.close();
-    }
-
-    public void insetarDispositivo( String serie, String mod, String mac, String desc){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values= new ContentValues();
-        values.put(SERIE, serie);
-         values.put(MAC, mac);
-        values.put(DESCRIPCION , desc);
-        db.insert(DISPOSITIVOS,null,values);
-        Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
-    }
-
-     public void insetarEstado(String idEstado, String Estado, String min, String max){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values= new ContentValues();
-        values.put(ID_ESTADO, idEstado);
-        values.put(ESTADO_GLUCOSA , Estado);
-        values.put(VALOR_MINIMO, min);
-        values.put(VALOR_MAXIMO , max);
-        db.insert(ESTADOS_GLUCOSA,null,values);
-        Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
-    }
-
-    public void insetarDoctor(String ced,String nom_doc, String ap_pa_doc, String ap_ma_doc, String co_el_doc,Boolean est,String id_usu) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(CEDULA,ced);
-        values.put(NOMBRE, nom_doc);
-        values.put(APELL_PATERNO, ap_pa_doc);
-        values.put(APELL_MATERNO, ap_ma_doc);
-        values.put(CORREO_ELECTRONICO, co_el_doc);
-        values.put(ESTADO, est);
-        values.put(ID_USUARIO,id_usu);
-        db.insert(MEDICOS, null, values);
-        Toast.makeText(context.getApplicationContext(), "Se guardo con exito ", Toast.LENGTH_LONG).show();
-    }
-
-    public void insetarGlucosa(Context context, SQLiteDatabase db, String idRegGlu, String fecha, String hora, String valor, String medida){
-        ContentValues values= new ContentValues();
-        values.put(ID_REGISTRO_GLUCOSA, idRegGlu);
-        values.put(FECHA, fecha);
-        values.put(HORA, hora);
-        values.put(VALOR , valor);
-        values.put(UNIDAD_MEDIDA, medida);
-        db.insert(REGISTROS_GLUCOSA,null,values);
-        Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
     }
 
     public void actualizar(String iden, String nom, String ap_pa, String ap_ma, String co_el, String fe_na, Float pe, Float est, Boolean es){
@@ -265,13 +212,13 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
     }
 
-    public String buscarId(String nom,String ap, String am){
+    public String buscar(String nom,String ap, String am){
 
         // array of columns to fetch
         String id="null";
         String[] columns = {ID_USUARIO};
         SQLiteDatabase db = this.getWritableDatabase();
-        String selection = NOMBRE + " =? and "+APELL_PATERNO+ "=? and " +APELL_PATERNO +"= ?";
+        String selection = NOMBRE + " = ? and "+APELL_PATERNO+ "= ? and " +APELL_PATERNO +" = ?";
         String[] selectionArgs = {nom, ap, am};
         System.out.println("Datos recididos "+ nom +" "+ap+" "+am);
         Cursor cursor = db.query(USUARIOS, //Table to query
@@ -285,6 +232,8 @@ public class BaseDeDatos extends SQLiteOpenHelper{
             if (cursor.moveToFirst()) {
                 id = cursor.getString(0);
                 System.out.println("++++++ hola " + id);
+            }else{
+                System.out.println("--------- Algo salio mal");
             }
 
         cursor.close();
@@ -308,36 +257,11 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                 null);                      //The sort order
         int cursorCount = cursor.getColumnCount();
 
+        cursor.moveToFirst();
+
         if (cursor.moveToFirst()) {
             for(int i=0;i<cursorCount;i++)
             datos.add(i,cursor.getString(i));
-        }
-
-        cursor.close();
-        db.close();
-        return datos;
-    }
-
-    public String[][] buscarTodo( String tabla, String columna, String valor){
-
-        // array of columns to fetch
-        String[][] datos = new String[10][];
-        SQLiteDatabase db = this.getWritableDatabase();
-        String selection = columna + " = ? ";
-        String[] selectionArgs = {valor};
-        Cursor cursor = db.query(tabla, //Table to query
-                null,                    //columns to return
-                selection,                  //columns for the WHERE clause
-                selectionArgs,              //The values for the WHERE clause
-                null,                       //group the rows
-                null,                      //filter by row groups
-                null);                      //The sort order
-        int cursorCount = cursor.getColumnCount();
-        int fila= 0;
-        while (cursor.moveToNext()){
-            for(int i=0;i<cursorCount;i++)
-                datos[fila][i]= cursor.getString(i);
-            fila+=1;
         }
 
         cursor.close();

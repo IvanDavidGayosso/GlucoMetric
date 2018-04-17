@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.Set;
 
 
-
+//Esta es la clase de la interfaz BuscarDispositivos. La cual realizará las siguientes acciones.
 public class BuscarDispositivos extends AppCompatActivity {
 
     //1)
@@ -33,6 +33,7 @@ public class BuscarDispositivos extends AppCompatActivity {
     private BluetoothAdapter mBtAdapter;
     private ArrayAdapter mPairedDevicesArrayAdapter;
 
+    //Metodo de crear en la cual se genera un ContentView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class BuscarDispositivos extends AppCompatActivity {
     }
 
 
+    
     @Override
     public void onResume()
     {

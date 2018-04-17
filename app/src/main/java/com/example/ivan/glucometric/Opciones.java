@@ -14,6 +14,8 @@ import android.widget.ListView;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+//Clase de opciones donde se crea un ArrayList, para guardar una serie de variables
 public class Opciones extends AppCompatActivity {
 
     View opciones;
@@ -23,7 +25,7 @@ public class Opciones extends AppCompatActivity {
     public Opciones() {
         // Required empty public constructor
     }
-
+    //Metodo en el cual se genera el ArrayList y se manda a llamar de la Interfaz (Usuarios)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

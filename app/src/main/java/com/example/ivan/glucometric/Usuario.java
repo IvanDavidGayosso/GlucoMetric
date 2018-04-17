@@ -1,3 +1,4 @@
+
 package com.example.ivan.glucometric;
 
 import android.content.Intent;
@@ -9,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+//Clase en la que se crean los valores de los campos de texto, botones y la base de datos
 public class Usuario extends AppCompatActivity {
     BaseDeDatos basedatos;
     EditText usuario,contrasena,rep_contra;
     Button aceptar,cancelar;
 
+    //Se enalazan las variables creadas en la clase con los botones y campos de texto de la interfaz (Usuario)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +28,8 @@ public class Usuario extends AppCompatActivity {
         aceptar = (Button) findViewById(R.id.btnAceptar);
         cancelar = (Button) findViewById(R.id.btnCancelar);
         aceptar.setOnClickListener(new View.OnClickListener() {
+            //Se generá un evento al dat clic para insertar los datos a la base de datos usuario y contraseña para posteriormente ser llamada
+            //por otra Interfaz
             @Override
             public void onClick(View v) {
 
