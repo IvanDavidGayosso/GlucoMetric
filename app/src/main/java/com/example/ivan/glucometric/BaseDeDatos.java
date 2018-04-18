@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+//Clase que generá una base de datos con nombre "glucometric" en su verión 1
 public class BaseDeDatos extends SQLiteOpenHelper{
 /*
     create table contrasenas(
@@ -62,6 +63,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                                                 +"FOREIGN KEY ("+ ID_USUARIO +") REFERENCES " + USUARIOS + "("+ ID_USUARIO + "));";
 
 
+    //Tabla Estados de la glucosa
     public static final String ESTADOS_GLUCOSA = "estados_glucosa";
     public static final String ID_ESTADO = "id_estado";
     public static final String ESTADO_GLUCOSA ="estado_glucosa";
@@ -73,6 +75,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                                                     +VALOR_MINIMO + " FLOAT(5,2) NOT NULL,"
                                                     +VALOR_MAXIMO+ " FLOAT(5,2) );";
 
+    //Tabla Dispositivos
     public static final String DISPOSITIVOS = "dispositivos";
     public static final String SERIE = "serie";
     public static final String MODELO ="modelo";
@@ -86,6 +89,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                                             +ID_USUARIO + " INTEGER NOT NULL,"
                                             +"FOREIGN KEY ("+ ID_USUARIO +") REFERENCES " + USUARIOS + "("+ ID_USUARIO + "));";
 
+    //Tabla Registros de glucosa
     public static final String REGISTROS_GLUCOSA = "registros_glucosa";
     public static final String ID_REGISTRO_GLUCOSA= "id_registro_glucosa";
     public static final String FECHA ="fecha";
@@ -103,6 +107,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                                                 +"FOREIGN KEY ("+ SERIE +") REFERENCES " + DISPOSITIVOS + "("+ SERIE + "),"
                                                 +"FOREIGN KEY ("+ ID_ESTADO +") REFERENCES " + ESTADOS_GLUCOSA + "("+ ID_ESTADO + "));";
 
+    //Tabla Médico
     public static final String CEDULA="cedula";
     public static final String MEDICOS = "medicos";
     public static final String TABLA_MEDICOS="CREATE TABLE IF NOT EXISTS " + MEDICOS + "("
@@ -115,16 +120,19 @@ public class BaseDeDatos extends SQLiteOpenHelper{
                                                 +ID_USUARIO + " INTEGER NOT NULL, "
                                                 +"FOREIGN KEY ("+ ID_USUARIO +") REFERENCES " + USUARIOS + "("+ ID_USUARIO+ "));";
 
+    //Eliminacion de la base de datos si esta ya existe
     public static final String DROP_DATABASE="DROP TABLE IF EXISTS "+GLUCOMETRIC+";";
 
 
 
+    //Constructor de la base de datos
     public BaseDeDatos(Context context) {
         super(context, GLUCOMETRIC, null,VERSION );
         this.context = context;
 
     }
 
+    //Manda a llamar las tablas de la base de datos
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLA_USUARIOS);
@@ -135,11 +143,13 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         db.execSQL(TABLA_MEDICOS);
     }
 
+    //Generá una nueva versión de la base de datos
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
 
+    //Metodo para eliminar un usuario mediante el cambio de un valor a 0
     public void Eliminar(String tabla, String iden, String col){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values= new ContentValues();
@@ -150,6 +160,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
 
         db.close();
     }
+    //Metodo en el cual se inserta un usuario a la tabla mediante los campos de la tabla Usuarios
     public void insertarUsuario( String nom, String ap_pa, String ap_ma, String fe_na, Float pe, Float est, Boolean es){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values= new ContentValues();
@@ -164,6 +175,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         db.close();
     }
 
+    //Metodo en el cual se inserta un Dispositivo a la tabla mediante los campos mediante dicha tabla
     public void insetarDispositivo( String serie, String mod, String mac, String desc){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values= new ContentValues();
@@ -174,6 +186,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
     }
 
+    //Metodo en el cual se inserta un nuevo estado de glucosa a la tabla mediante los campos de la tabla Estado de la Glucosa
      public void insetarEstado(String idEstado, String Estado, String min, String max){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values= new ContentValues();
@@ -185,6 +198,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
     }
 
+    ////Metodo en el cual se inserta un doctor a la tabla mediante los campos de la dicha tabla que se entrelazan con la base de datos
     public void insetarDoctor(String ced,String nom_doc, String ap_pa_doc, String ap_ma_doc, String co_el_doc,Boolean est,String id_usu) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -199,6 +213,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         Toast.makeText(context.getApplicationContext(), "Se guardo con exito ", Toast.LENGTH_LONG).show();
     }
 
+    //Metodo en el cual se inserta la glucosa de un paciente a la tabla mediante los campos de esta dicha tabla (Registros de Glucosa)
     public void insetarGlucosa(Context context, SQLiteDatabase db, String idRegGlu, String fecha, String hora, String valor, String medida){
         ContentValues values= new ContentValues();
         values.put(ID_REGISTRO_GLUCOSA, idRegGlu);
@@ -210,6 +225,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
     }
 
+    //Metodo en el cual se actualiza un usuario
     public void actualizar(String iden, String nom, String ap_pa, String ap_ma, String co_el, String fe_na, Float pe, Float est, Boolean es){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -228,6 +244,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         Toast.makeText(context.getApplicationContext(), "Se modifico con exito " , Toast.LENGTH_LONG).show();
     }
 
+    //Metodo en el cual busca el usuario y contraseña los cuales coincidan
     public String buscar(String usu,String pass) {
 
         try {
@@ -253,6 +270,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         }
     }
 
+    //Se inserta una nueva contraseña con el Identificador del usuario
     public void insertar( String usu, String con,String fec,Integer id_usu){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values= new ContentValues();
@@ -265,6 +283,8 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         Toast.makeText(context.getApplicationContext(), "Se guardo con exito " , Toast.LENGTH_LONG).show();
     }
 
+    //Busca el id del usuario y realiza una consulta o cursor
+    //Al ser verdadera esta se muestra un mensaje con el nombre del usuario
     public String buscarId(String nom,String ap, String am){
 
         // array of columns to fetch
@@ -292,6 +312,7 @@ public class BaseDeDatos extends SQLiteOpenHelper{
         return id;
     }
 
+    //Metodo en el cual se generá una lista con datos mediante un cursor
     public ArrayList<String> buscar( String tabla, String columna, Integer valor){
 
         // array of columns to fetch
