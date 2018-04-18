@@ -11,7 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-
+//Clase en la cual se encuentran las variables.
+//Extencion al un adaptador
 public class Adaptador extends BaseAdapter{
     private static LayoutInflater inflater = null;
     Context contexto;
@@ -19,6 +20,7 @@ public class Adaptador extends BaseAdapter{
     String id_usuario;
     GuardarMedico guardar_medico_class;
 
+    //Constructor del Adaptador
     public Adaptador(Context contexto,String datos[][] ){
         BaseDeDatos datosConsulta = new BaseDeDatos(contexto);
         this.contexto=contexto;
@@ -28,6 +30,7 @@ public class Adaptador extends BaseAdapter{
 
     }
 
+    //Metodo que manda a llamar de una interfaz los datos y los guarda en las variables
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
         final View vista= inflater.inflate(R.layout.elemento_lista,null);
@@ -40,11 +43,13 @@ public class Adaptador extends BaseAdapter{
         return vista;
     }
 
+    //Metodo que retorna los datos
     @Override
     public int getCount() {
         return datos.length;
     }
 
+    
     @Override
     public Object getItem(int position) {
         return null;
