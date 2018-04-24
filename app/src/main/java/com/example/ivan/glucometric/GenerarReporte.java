@@ -44,14 +44,17 @@ public class GenerarReporte extends AppCompatActivity {
                 File pdfDIR = new File(tarjetaSD + File.separator + NOMBRE_CARPETA_APP);
                 if (!pdfDIR.exists()) {
                     pdfDIR.mkdir();
+                    System.out.println(" ---- Segenero carpeta 1 ---");
                 }
                 File pdfSubDir = new File(pdfDIR.getPath() + File.separator + GENERADOS);
                 if (!pdfSubDir.exists()) {
                     pdfSubDir.mkdir();
+                    System.out.println(" ---- Segenero carpeta 2 ---");
+
                 }
 
-                String nombre_completo = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_CARPETA_APP +
-                        File.separator + GENERADOS + File.separator + NOMBRE_ARCHIVO;
+                String nombre_completo = Environment.getExternalStorageDirectory() + File.separator + NOMBRE_CARPETA_APP
+                        + File.separator + GENERADOS + File.separator + NOMBRE_ARCHIVO;
 
                 File outputfile = new File(nombre_completo);
                 if (outputfile.exists()) {

@@ -66,7 +66,7 @@ public class GraficasGlucosa extends AppCompatActivity {
         leftAxis.addLimitLine(upper_Limit);
         leftAxis.addLimitLine(lower_Limit);
         leftAxis.setAxisMaximum(250f);
-        leftAxis.setAxisMinimum(-259f);
+        leftAxis.setAxisMinimum(0f);
         leftAxis.enableGridDashedLine(10f,10f,0);
         leftAxis.setDrawLimitLinesBehindData(true);
 
@@ -78,18 +78,7 @@ public class GraficasGlucosa extends AppCompatActivity {
         Cursor c = basedatos.mostrarRegistros("1");
         ArrayList<Entry> yValues = new ArrayList<>();
         int i=0;
-        /*yValues.add(new Entry(0,160f));
-        yValues.add(new Entry(1,100f));
-        yValues.add(new Entry(2,140f));
-        yValues.add(new Entry(3,230f));
-        yValues.add(new Entry(4,190f));
-        yValues.add(new Entry(5,80f));
-        yValues.add(new Entry(6,100f));
-        yValues.add(new Entry(7,60f));
-        yValues.add(new Entry(8,195f));
-        yValues.add(new Entry(9,40f));
-        yValues.add(new Entry(10,210f));
-        yValues.add(new Entry(11,10f));*/
+
         if(c.moveToFirst()){
             do{
                 yValues.add(new Entry(i,c.getFloat(3)));
