@@ -95,58 +95,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:text="Minimo de glucosa: "
-                    android:textColor="#ffffff"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:text="Máximo de glucosa: "
-                    android:textColor="#ffffff"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginBottom="40dp">
-
-                <Spinner
-                    android:layout_width="90dp"
-                    android:layout_height="35dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#ffffff" />
-
-                <Spinner
-                    android:layout_width="90dp"
-                    android:layout_height="35dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="85dp"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#ffffff" />
-
-
-            </LinearLayout>
         </LinearLayout>
 
     </RelativeLayout>

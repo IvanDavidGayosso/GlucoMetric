@@ -70,16 +70,8 @@
                     android:hint="Ingrese la contraseña"
                     android:padding="5dp"
                     android:textColor="#FBFAFA"
+                    android:inputType="textPassword"
                     android:textSize="18dp" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:background="@color/color"
-                    android:text="Olvido su contraseña"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnAcceder"

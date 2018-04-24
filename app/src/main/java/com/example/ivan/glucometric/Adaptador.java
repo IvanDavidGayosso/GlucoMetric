@@ -16,15 +16,11 @@ public class Adaptador extends BaseAdapter{
     private static LayoutInflater inflater = null;
     Context contexto;
     String[][] datos;
-    String id_usuario;
-    GuardarMedico guardar_medico_class;
 
     public Adaptador(Context contexto,String datos[][] ){
-        BaseDeDatos datosConsulta = new BaseDeDatos(contexto);
         this.contexto=contexto;
         this.datos=datos;
         inflater=(LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
-
 
     }
 

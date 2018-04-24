@@ -39,7 +39,7 @@ public class Usuario extends AppCompatActivity {
                 String id = basedatos.buscarId(parametros.getString("nombre"),parametros.getString("pate"),parametros.getString("mate"));
                 basedatos.insertar(usuario.getText().toString(),contrasena.getText().toString(),"2018/02/01",Integer.parseInt(id));
                 Intent intent = new Intent(getApplicationContext(), MenuPrincipal.class);
-                intent.putExtra("IDUSUARIO",basedatos.buscar(usuario.getText().toString(),contrasena.getText().toString()));
+                intent.putExtra("IDUSUARIO",id);
                 startActivity(intent);
                 finish();
 

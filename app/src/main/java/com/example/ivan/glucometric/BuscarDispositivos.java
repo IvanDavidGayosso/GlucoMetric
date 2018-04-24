@@ -33,11 +33,17 @@ public class BuscarDispositivos extends AppCompatActivity {
     private BluetoothAdapter mBtAdapter;
     private ArrayAdapter mPairedDevicesArrayAdapter;
 
+    String id;
+
     //Metodo de crear en la cual se genera un ContentView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_buscar_dispositivos);
+        Intent principal = this.getIntent();
+        id= principal.getStringExtra("IDUSUARIO");
+        System.out.println("Hola !!!!!!!!!!!!!1"+id);
+
     }
 
 
@@ -86,6 +92,7 @@ public class BuscarDispositivos extends AppCompatActivity {
             // Realiza un intent para iniciar la siguiente actividad
             // mientras toma un EXTRA_DEVICE_ADDRESS que es la dirección MAC.
             Intent i = new Intent(BuscarDispositivos.this, RegistroGlucosa.class);//<-<- PARTE A MODIFICAR >->->
+            i.putExtra("IDUSUARIO",id);
             i.putExtra(EXTRA_DEVICE_ADDRESS, address);
             startActivity(i);
         }

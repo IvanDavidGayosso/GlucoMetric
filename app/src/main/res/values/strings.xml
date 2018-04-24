@@ -106,4 +106,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_lista_busqueda">ListaBusqueda</string>
+    <string name="title_activity_lista_medicos">ListaMedicos</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.ivan.glucometric;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 
 //Se generá la clase de Graficas de glucosa en la cual se obtienen los valores de la grafica.
 public class GraficasGlucosa extends AppCompatActivity {
-
+    BaseDeDatos basedatos;
     private  LineChart mChart;
     View graficas_glucosa;
     public GraficasGlucosa() {
@@ -42,7 +43,7 @@ public class GraficasGlucosa extends AppCompatActivity {
         //En este metodo se generán las las propiedades de la grafica, desde el nivel exedente (el punto en el cual será exedente el nivel de glucosa en la grafica que será señalado de color Rojo).
         mChart = (LineChart) findViewById(R.id.linechart);
         mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(false);
+        mChart.setScaleEnabled(true);
         LimitLine upper_Limit = new LimitLine(180f, "Exedente");
         upper_Limit.setLineWidth(4f);
         upper_Limit.enableDashedLine(10f, 10f, 0f);
@@ -65,7 +66,7 @@ public class GraficasGlucosa extends AppCompatActivity {
         leftAxis.addLimitLine(upper_Limit);
         leftAxis.addLimitLine(lower_Limit);
         leftAxis.setAxisMaximum(250f);
-        leftAxis.setAxisMinimum(5f);
+        leftAxis.setAxisMinimum(-259f);
         leftAxis.enableGridDashedLine(10f,10f,0);
         leftAxis.setDrawLimitLinesBehindData(true);
 
@@ -73,8 +74,11 @@ public class GraficasGlucosa extends AppCompatActivity {
 
          //Despues de esto se generá un ArrayList para agregar los valores de los niveles de glucosa y mostrandolos en un histograma 
         //con lineas color blanco en el cual se obserba que se agregarán 12 valores
+        basedatos = new BaseDeDatos(this);
+        Cursor c = basedatos.mostrarRegistros("1");
         ArrayList<Entry> yValues = new ArrayList<>();
-        yValues.add(new Entry(0,160f));
+        int i=0;
+        /*yValues.add(new Entry(0,160f));
         yValues.add(new Entry(1,100f));
         yValues.add(new Entry(2,140f));
         yValues.add(new Entry(3,230f));
@@ -85,7 +89,14 @@ public class GraficasGlucosa extends AppCompatActivity {
         yValues.add(new Entry(8,195f));
         yValues.add(new Entry(9,40f));
         yValues.add(new Entry(10,210f));
-        yValues.add(new Entry(11,10f));
+        yValues.add(new Entry(11,10f));*/
+        if(c.moveToFirst()){
+            do{
+                yValues.add(new Entry(i,c.getFloat(3)));
+                System.out.println(i + "Listo "+c.getFloat(3));
+                i=i+1;
+            }while (c.moveToNext());
+        }
         LineDataSet set1 = new LineDataSet(yValues, "Glucosa");
         set1.setColor(Color.WHITE);
         set1.setValueTextColor(Color.WHITE);
@@ -98,7 +109,14 @@ public class GraficasGlucosa extends AppCompatActivity {
         mChart.setData(data);
 
         //Aquí los valores insertados anteriormente en el cual se visualizarán los meses en el eje X
-        String[] values = new String[]{"Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"};
+        String[] values =new String[i];
+        i=0;
+        if(c.moveToFirst()){
+            do{
+                values[i]=c.getString(2);
+                i=i+1;
+            }while (c.moveToNext());
+        }
         XAxis xAxis = mChart.getXAxis();
         xAxis.setValueFormatter(new MyAxisValueFormatter(values));
         xAxis.setGranularity(1f);

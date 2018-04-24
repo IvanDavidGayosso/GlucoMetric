@@ -22,24 +22,6 @@
             android:layout_centerHorizontal="true"
             android:text="Coontrol led" />
 
-        <Button
-            android:id="@+id/IdEncender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/IdControl"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="31dp"
-            android:text="Encender" />
-
-        <Button
-            android:id="@+id/IdApagar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/IdEncender"
-            android:layout_below="@+id/IdEncender"
-            android:layout_marginTop="40dp"
-            android:text="Apagar" />
-
         <TextView
             android:id="@+id/IdBufferIn"
             android:layout_width="match_parent"
@@ -59,12 +41,30 @@
             android:text="Desconectar" />
 
         <TextView
+            android:id="@+id/IdGlucosa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="194dp"
+            android:text="Glucosa:" />
+
+        <TextView
+            android:id="@+id/IdHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="214dp"
+            android:text="Hora:" />
+
+        <TextView
             android:id="@+id/IdFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/IdBufferIn"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="128dp"
             android:text="Fecha:" />
     </RelativeLayout>
 

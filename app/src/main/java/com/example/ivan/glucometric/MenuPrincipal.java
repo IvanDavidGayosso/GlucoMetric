@@ -5,19 +5,14 @@ import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.view.View.OnClickListener;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 //Clase en la que se tienen los contenedores y algunas variables
 //Clase en la cual se generán las variables de los botones del MenuPrincipal
 public class MenuPrincipal extends AppCompatActivity {
-    CardView cv_perfil,cv_medico,cv_graficas,cv_dispositivos;
+    CardView cv_perfil,cv_medico,cv_graficas,cv_dispositivos,cv_salir,cv_generar;
     static String OPCION="opcion";
     final String valor="1";
     String usuario;
@@ -30,10 +25,11 @@ public class MenuPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         cv_perfil = (CardView) findViewById(R.id.cv_perfil);
+        cv_salir = (CardView) findViewById(R.id.cv_salir);
         cv_medico = (CardView) findViewById(R.id.cv_medico);
         cv_graficas = (CardView) findViewById(R.id.cv_graficas);
         cv_dispositivos = (CardView) findViewById(R.id.cv_dispositivos);
-        salir=(Button) findViewById(R.id.bn_salir);
+        cv_generar = (CardView) findViewById(R.id.cv_generar);
         final Intent valor_inicio = getIntent();
         usuario= valor_inicio.getStringExtra("IDUSUARIO");
 
@@ -49,7 +45,7 @@ public class MenuPrincipal extends AppCompatActivity {
         ////En este Evento, al momento del clic en perfil dirigirá al usuario a GuardarMedico para lo cual lo diriguirá a ese Activity
         cv_medico.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MenuPrincipal.this, ListaElementos.class);
+                Intent intent = new Intent(MenuPrincipal.this, ListaMedicos.class);
                 intent.putExtra("IDUSUARIO",usuario);
                 startActivity(intent);
             }
@@ -74,13 +70,21 @@ public class MenuPrincipal extends AppCompatActivity {
         });
 
         //En este Evento, al momento del clic en perfil dirigirá al usuario a la interfaz de InicioSesion
-        salir.setOnClickListener(new OnClickListener() {
+        cv_salir.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuPrincipal.this, InicioSesion.class);
-                intent.putExtra("IDUSUARIO",usuario);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        cv_generar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuPrincipal.this, GenerarReporte.class);
+                startActivity(intent);
+
             }
         });
 

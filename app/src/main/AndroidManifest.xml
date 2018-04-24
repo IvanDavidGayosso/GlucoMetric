@@ -5,6 +5,9 @@
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -30,9 +33,14 @@
             android:label="@string/title_activity_menu_principal" />
         <activity android:name=".GraficasGlucosa" />
         <activity android:name=".BuscarDispositivos" />
-        <activity android:name=".ListaElementos" />
         <activity android:name=".Usuario" />
-        <activity android:name=".ModificarUsuario"></activity>
+        <activity android:name=".ModificarUsuario" />
+        <activity
+            android:name=".ListaMedicos"
+            android:label="@string/title_activity_lista_medicos"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ModificarMedico" />
+        <activity android:name=".GenerarReporte"></activity>
     </application>
 
 </manifest>
