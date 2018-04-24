@@ -20,7 +20,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     Context context;
 
     //Tabla usuario
-    public static final String ID_USUARIO = "id_usuario";
+    public static final String ID_USUARIO  = "id_usuario";
     public static final String CORREO_ELECTRONICO = "correo_electronico";
     public static final String NOMBRE = "nombre";
     public static final String APELL_PATERNO = "apell_paterno";
