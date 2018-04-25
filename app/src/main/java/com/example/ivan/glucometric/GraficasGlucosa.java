@@ -40,7 +40,8 @@ public class GraficasGlucosa extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_graficas_glucosa);
 
-        //En este metodo se generán las las propiedades de la grafica, desde el nivel exedente (el punto en el cual será exedente el nivel de glucosa en la grafica que será señalado de color Rojo).
+        //En este metodo se generán las las propiedades de la grafica, desde el nivel exedente (el punto en el cual será 
+        //exedente el nivel de glucosa en la grafica que será señalado de color Rojo).
         mChart = (LineChart) findViewById(R.id.linechart);
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(true);
@@ -51,7 +52,8 @@ public class GraficasGlucosa extends AppCompatActivity {
         upper_Limit.setTextColor(Color.RED);
         upper_Limit.setTextSize(15f);
 
-        //Posteriormente se crea el nivel Bajo (el punto en el cual el nivel de azucar es muy bajo en este se generán las propiedades para señalarlo de color amarillo).
+        //Posteriormente se crea el nivel Bajo (el punto en el cual el nivel de azucar es muy bajo en este 
+        //se generán las propiedades para señalarlo de color amarillo).
         LimitLine lower_Limit = new LimitLine(60f, "Bajo");
         lower_Limit.setLineWidth(3f);
         lower_Limit.enableDashedLine(10f, 10f, 0f);
@@ -116,7 +118,7 @@ public class GraficasGlucosa extends AppCompatActivity {
         private String[] mValues;
 
         public MyAxisValueFormatter(String[] values) {this.mValues = values; }
-
+        //Se mandan a llamar los valores enteros Axis para colocarlos
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
             return mValues[(int)value];
