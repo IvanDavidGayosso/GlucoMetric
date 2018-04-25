@@ -9,13 +9,15 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-//Clase modificar usuario en la cual se crean las variables en las que el usuario sera modificado mediante los campos de texto y a su vez los botones
+//Clase modificar usuario en la cual se crean las variables en las que el usuario sera modificado mediante los 
+//campos de texto y a su vez los botones
 public class ModificarUsuario extends AppCompatActivity {
     Button btn_aceptar,btn_cancelar;
     EditText id,nombre,ap,am,fe_na,peso,esta;
     BaseDeDatos basedatos;
     ArrayList<String> datos;
-    //Metodo en el cual se crea una instancia para llamar a los valores antes generados; al final de esta instancia se genera la base de datos y se manda a llamar al metodo (buscar)
+    //Metodo en el cual se crea una instancia para llamar a los valores antes generados; al final de esta 
+    //instancia se genera la base de datos y se manda a llamar al metodo (buscar)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
